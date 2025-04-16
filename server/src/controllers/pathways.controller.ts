@@ -3,7 +3,7 @@ import { Pathway, PathwayUpdateInput } from "../models/pathway.model";
 
 const getAllPathways = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const pathways = await Pathway.find().projection("-modules").lean();
+        const pathways = await Pathway.find().select("-modules").lean();
         return res.json({ pathways });
     }
     catch (err) {
