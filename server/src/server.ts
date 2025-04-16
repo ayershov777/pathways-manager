@@ -1,19 +1,38 @@
 import dotenv from "dotenv";
-import express from "express";
-import cors from "cors";
-import morgan from "morgan";
-import { router as pathwaysRouter } from "./routes/pathway.routes";
+import app from "./app";
+import { connectDb } from "./config/db";
 
+// Load environment variables first
 dotenv.config();
 
-const app = express();
+// Set port
+const PORT = process.env.PORT || 3000;
 
-app.use(morgan('dev'));
-app.use(cors());
-app.use(express.json());
+/**
+ * Start server function
+ */
+const startServer = async () => {
+    try {
+        // Connect to database first
+        await connectDb();
 
-app.use('/api/v1/pathways', pathwaysRouter);
+        // Start server after successful database connection
+        app.listen(PORT, () => {
+            console.log(`Server listening on port ${PORT}...`);
+        });
+    } catch (err) {
+        console.error('Failed to connect to database. Server not started.');
+        console.error(err);
+        process.exit(1);
+    }
+};
 
-app.listen(3000, () => {
-    console.log("server listening...");
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+    console.error('UNCAUGHT EXCEPTION! Shutting down...');
+    console.error(error.name, error.message);
+    process.exit(1);
 });
+
+// Start the server
+startServer();

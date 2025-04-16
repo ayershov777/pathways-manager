@@ -1,15 +1,40 @@
 import { Router } from "express";
 import { controller as pathwaysCtrl } from "../controllers/pathways.controller";
-import { validateCreatePathway, validateUpdatePathway } from "../middleware/validation.middleware";
+import { validateCreatePathway, validateUpdatePathway, validatePathwayId } from "../middleware/validators/pathway.validators";
 
 export const router = Router();
 
+/**
+ * @route GET /api/v1/pathways
+ * @description Get all pathways with pagination
+ * @access Public
+ */
 router.get("/", pathwaysCtrl.getAllPathways);
 
-router.get("/:id", pathwaysCtrl.getPathwayById);
+/**
+ * @route GET /api/v1/pathways/:id
+ * @description Get a pathway by ID
+ * @access Public
+ */
+router.get("/:id", validatePathwayId, pathwaysCtrl.getPathwayById);
 
+/**
+ * @route POST /api/v1/pathways
+ * @description Create a new pathway
+ * @access Public
+ */
 router.post("/", validateCreatePathway, pathwaysCtrl.createPathway);
 
-router.delete("/:id", pathwaysCtrl.removePathway);
+/**
+ * @route DELETE /api/v1/pathways/:id
+ * @description Delete a pathway by ID
+ * @access Public
+ */
+router.delete("/:id", validatePathwayId, pathwaysCtrl.removePathway);
 
-router.patch("/:id", validateUpdatePathway, pathwaysCtrl.updatePathway);
+/**
+ * @route PATCH /api/v1/pathways/:id
+ * @description Update a pathway by ID
+ * @access Public
+ */
+router.patch("/:id", validatePathwayId, validateUpdatePathway, pathwaysCtrl.updatePathway);
