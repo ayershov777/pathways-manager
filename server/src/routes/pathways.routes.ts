@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { controller as pathwaysCtrl } from "../controllers/pathways.controller";
-import { validateCreatePathway, validateUpdatePathway, validatePathwayId } from "../middleware/validators/pathway.validators";
+import { validateCreatePathway, validateUpdatePathway, validatePathwayId } from "../middleware/validators/pathways.validators";
 
 export const router = Router();
 

@@ -3,7 +3,7 @@ import {
     validateCreatePathway,
     validateUpdatePathway,
     validatePathwayId
-} from '../../../middleware/validators/pathway.validators';
+} from '../../../middleware/validators/pathways.validators';
 import { createError } from '../../../middleware/error.middleware';
 import { Pathway } from '../../../models/pathway.model';
 import mongoose from 'mongoose';

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { router as pathwaysRouter } from "./routes/pathway.routes";
+import { router as pathwaysRouter } from "./routes/pathways.routes";
 import { routeNotFoundMiddleware, errorHandlerMiddleware } from "./middleware/error.middleware";
 
 /**
