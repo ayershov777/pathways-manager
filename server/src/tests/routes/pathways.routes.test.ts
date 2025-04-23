@@ -31,10 +31,7 @@ describe('Pathway Routes', () => {
                 .get('/api/v1/pathways')
                 .expect(200);
 
-            expect(response.body.pathways).toBeDefined();
-            expect(response.body.pathways.length).toBeLessThanOrEqual(10);
-            expect(response.body.pagination).toBeDefined();
-            expect(response.body.pagination.page).toBe(1);
+            expect(response.body).toMatchSnapshot();
         });
 
         it('should get pathways with custom pagination', async () => {
@@ -42,10 +39,7 @@ describe('Pathway Routes', () => {
                 .get('/api/v1/pathways?page=2&limit=5')
                 .expect(200);
 
-            expect(response.body.pathways).toBeDefined();
-            expect(response.body.pathways.length).toBeLessThanOrEqual(5);
-            expect(response.body.pagination).toBeDefined();
-            expect(response.body.pagination.page).toBe(2);
+            expect(response.body).toMatchSnapshot();
         });
     });
 
@@ -55,9 +49,7 @@ describe('Pathway Routes', () => {
                 .get(`/api/v1/pathways/${pathwayId}`)
                 .expect(200);
 
-            expect(response.body.pathway).toBeDefined();
-            expect(response.body.pathway._id).toBe(pathwayId);
-            expect(response.body.pathway.name).toBe('Test Pathway');
+            expect(response.body).toMatchSnapshot();
         });
 
         it('should return 404 for non-existent pathway', async () => {
@@ -67,8 +59,7 @@ describe('Pathway Routes', () => {
                 .get(`/api/v1/pathways/${nonExistentId}`)
                 .expect(404);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('not found');
+            expect(response.body).toMatchSnapshot();
         });
 
         it('should return 400 for invalid id format', async () => {
@@ -76,8 +67,7 @@ describe('Pathway Routes', () => {
                 .get('/api/v1/pathways/invalid-id')
                 .expect(400);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('Invalid pathway ID format');
+            expect(response.body).toMatchSnapshot();
         });
     });
 
@@ -93,12 +83,8 @@ describe('Pathway Routes', () => {
                 .send({ pathway: newPathway })
                 .expect(201);
 
-            expect(response.body.pathway).toBeDefined();
-            expect(response.body.pathway.name).toBe(newPathway.name);
-            expect(response.body.pathway.description).toBe(newPathway.description);
-            expect(response.body.pathway._id).toBeDefined();
+            expect(response.body).toMatchSnapshot();
 
-            // Verify it was saved to the database
             const savedPathway = await Pathway.findById(response.body.pathway._id);
             expect(savedPathway).toBeDefined();
             expect(savedPathway?.name).toBe(newPathway.name);
@@ -110,8 +96,7 @@ describe('Pathway Routes', () => {
                 .send({})
                 .expect(400);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('must contain a pathway object');
+            expect(response.body).toMatchSnapshot();
         });
 
         it('should return 400 if required fields are missing', async () => {
@@ -120,8 +105,7 @@ describe('Pathway Routes', () => {
                 .send({ pathway: { name: 'Missing Description' } })
                 .expect(400);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('Validation error');
+            expect(response.body).toMatchSnapshot();
         });
 
         it('should return 409 if pathway name already exists', async () => {
@@ -136,8 +120,7 @@ describe('Pathway Routes', () => {
                 })
                 .expect(409);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('unavailable');
+            expect(response.body).toMatchSnapshot();
         });
     });
 
@@ -153,10 +136,7 @@ describe('Pathway Routes', () => {
                 .send({ pathway: updateData })
                 .expect(200);
 
-            expect(response.body.pathway).toBeDefined();
-            expect(response.body.pathway.name).toBe(updateData.name);
-            expect(response.body.pathway.description).toBe(updateData.description);
-            expect(response.body.pathway._id).toBe(pathwayId);
+            expect(response.body).toMatchSnapshot();
 
             // Verify it was updated in the database
             const updatedPathway = await Pathway.findById(pathwayId);
@@ -171,8 +151,7 @@ describe('Pathway Routes', () => {
                 .send({ pathway: { name: 'Updated Name' } })
                 .expect(404);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('not found');
+            expect(response.body).toMatchSnapshot();
         });
 
         it('should return 400 if pathway object is missing', async () => {
@@ -181,8 +160,7 @@ describe('Pathway Routes', () => {
                 .send({})
                 .expect(400);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('must contain a pathway object');
+            expect(response.body).toMatchSnapshot();
         });
     });
 
@@ -192,8 +170,7 @@ describe('Pathway Routes', () => {
                 .delete(`/api/v1/pathways/${pathwayId}`)
                 .expect(200);
 
-            expect(response.body.message).toContain('successfully deleted');
-            expect(response.body.pathway._id).toBe(pathwayId);
+            expect(response.body).toMatchSnapshot();
 
             // Verify it was deleted from the database
             const deletedPathway = await Pathway.findById(pathwayId);
@@ -207,8 +184,7 @@ describe('Pathway Routes', () => {
                 .delete(`/api/v1/pathways/${nonExistentId}`)
                 .expect(404);
 
-            expect(response.body.success).toBe(false);
-            expect(response.body.error.message).toContain('not found');
+            expect(response.body).toMatchSnapshot();
         });
     });
 });

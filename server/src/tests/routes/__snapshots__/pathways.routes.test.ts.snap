@@ -1,0 +1,236 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pathway Routes DELETE /api/v1/pathways/:id should delete an existing pathway 1`] = `
+{
+  "message": "Pathway successfully deleted",
+  "pathway": {
+    "__v": 0,
+    "_id": "6808546d3ecabe44f5215e4f",
+    "description": "Test Description",
+    "modules": [],
+    "name": "Test Pathway",
+  },
+}
+`;
+
+exports[`Pathway Routes DELETE /api/v1/pathways/:id should return 404 for non-existent pathway 1`] = `
+{
+  "error": {
+    "message": "Pathway not found",
+  },
+  "success": false,
+}
+`;
+
+exports[`Pathway Routes GET /api/v1/pathways should get all pathways with default pagination 1`] = `
+{
+  "pagination": {
+    "page": 1,
+    "pages": 2,
+    "total": 16,
+  },
+  "pathways": [
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d57",
+      "description": "Test Description",
+      "name": "Test Pathway",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d5a",
+      "description": "Description 1",
+      "name": "Pathway 1",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d5b",
+      "description": "Description 2",
+      "name": "Pathway 2",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d5c",
+      "description": "Description 3",
+      "name": "Pathway 3",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d5d",
+      "description": "Description 4",
+      "name": "Pathway 4",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d5e",
+      "description": "Description 5",
+      "name": "Pathway 5",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d5f",
+      "description": "Description 6",
+      "name": "Pathway 6",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d60",
+      "description": "Description 7",
+      "name": "Pathway 7",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d61",
+      "description": "Description 8",
+      "name": "Pathway 8",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d62",
+      "description": "Description 9",
+      "name": "Pathway 9",
+    },
+  ],
+}
+`;
+
+exports[`Pathway Routes GET /api/v1/pathways should get pathways with custom pagination 1`] = `
+{
+  "pagination": {
+    "page": 2,
+    "pages": 4,
+    "total": 16,
+  },
+  "pathways": [
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d73",
+      "description": "Description 5",
+      "name": "Pathway 5",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d74",
+      "description": "Description 6",
+      "name": "Pathway 6",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d75",
+      "description": "Description 7",
+      "name": "Pathway 7",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d76",
+      "description": "Description 8",
+      "name": "Pathway 8",
+    },
+    {
+      "__v": 0,
+      "_id": "6808546d3ecabe44f5215d77",
+      "description": "Description 9",
+      "name": "Pathway 9",
+    },
+  ],
+}
+`;
+
+exports[`Pathway Routes GET /api/v1/pathways/:id should get a pathway by id 1`] = `
+{
+  "pathway": {
+    "__v": 0,
+    "_id": "6808546d3ecabe44f5215d82",
+    "description": "Test Description",
+    "modules": [],
+    "name": "Test Pathway",
+  },
+}
+`;
+
+exports[`Pathway Routes GET /api/v1/pathways/:id should return 400 for invalid id format 1`] = `
+{
+  "error": {
+    "message": "Invalid pathway ID format",
+  },
+  "success": false,
+}
+`;
+
+exports[`Pathway Routes GET /api/v1/pathways/:id should return 404 for non-existent pathway 1`] = `
+{
+  "error": {
+    "message": "Pathway not found",
+  },
+  "success": false,
+}
+`;
+
+exports[`Pathway Routes PATCH /api/v1/pathways/:id should return 400 if pathway object is missing 1`] = `
+{
+  "error": {
+    "message": "Request body must contain a pathway object",
+  },
+  "success": false,
+}
+`;
+
+exports[`Pathway Routes PATCH /api/v1/pathways/:id should return 404 for non-existent pathway 1`] = `
+{
+  "error": {
+    "message": "Pathway not found",
+  },
+  "success": false,
+}
+`;
+
+exports[`Pathway Routes PATCH /api/v1/pathways/:id should update an existing pathway 1`] = `
+{
+  "pathway": {
+    "__v": 0,
+    "_id": "6808546d3ecabe44f5215e0f",
+    "description": "Updated Description",
+    "modules": [],
+    "name": "Updated Pathway",
+  },
+}
+`;
+
+exports[`Pathway Routes POST /api/v1/pathways should create a new pathway 1`] = `
+{
+  "pathway": {
+    "__v": 0,
+    "_id": "6808546d3ecabe44f5215dd1",
+    "description": "New Description",
+    "modules": [],
+    "name": "New Pathway",
+  },
+}
+`;
+
+exports[`Pathway Routes POST /api/v1/pathways should return 400 if pathway object is missing 1`] = `
+{
+  "error": {
+    "message": "Request body must contain a pathway object",
+  },
+  "success": false,
+}
+`;
+
+exports[`Pathway Routes POST /api/v1/pathways should return 400 if required fields are missing 1`] = `
+{
+  "error": {
+    "message": "Validation error: description: must have required property 'description'",
+  },
+  "success": false,
+}
+`;
+
+exports[`Pathway Routes POST /api/v1/pathways should return 409 if pathway name already exists 1`] = `
+{
+  "error": {
+    "message": "The specified pathway name is unavailable.",
+  },
+  "success": false,
+}
+`;
