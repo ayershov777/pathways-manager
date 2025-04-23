@@ -9,7 +9,8 @@ describe('Pathway Service', () => {
         // Create a test pathway
         const pathway = await Pathway.create({
             name: 'Test Pathway',
-            description: 'Test Description'
+            description: 'Test Description',
+            owner: new mongoose.Types.ObjectId() // Mock owner ID
         });
         testPathwayId = pathway._id.toString();
 

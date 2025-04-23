@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth Routes POST /api/v1/auth/login should authenticate a user and return token 1`] = `
+{
+  "token": "mock-token-for-68089c9c39a31ea80814c7a3",
+  "user": {
+    "__v": 0,
+    "_id": "68089c9c39a31ea80814c7a3",
+    "createdAt": "2025-04-23T07:54:04.469Z",
+    "email": "existing@example.com",
+    "name": "Existing User",
+    "updatedAt": "2025-04-23T07:54:04.469Z",
+  },
+}
+`;
+
+exports[`Auth Routes POST /api/v1/auth/login should return 400 if required fields are missing 1`] = `
+{
+  "error": {
+    "message": "Validation error: email: must have required property 'email', password: must have required property 'password'",
+  },
+  "success": false,
+}
+`;
+
+exports[`Auth Routes POST /api/v1/auth/login should return 401 for incorrect password 1`] = `
+{
+  "error": {
+    "message": "Invalid credentials",
+  },
+  "success": false,
+}
+`;
+
+exports[`Auth Routes POST /api/v1/auth/login should return 401 for non-existent user 1`] = `
+{
+  "error": {
+    "message": "Invalid credentials",
+  },
+  "success": false,
+}
+`;
+
+exports[`Auth Routes POST /api/v1/auth/signup should create a new user and return token 1`] = `
+{
+  "token": "mock-token-for-68089c9c39a31ea80814c795",
+  "user": {
+    "__v": 0,
+    "_id": "68089c9c39a31ea80814c795",
+    "createdAt": "2025-04-23T07:54:04.253Z",
+    "email": "new@example.com",
+    "name": "New User",
+    "updatedAt": "2025-04-23T07:54:04.253Z",
+  },
+}
+`;
+
+exports[`Auth Routes POST /api/v1/auth/signup should return 400 if required fields are missing 1`] = `
+{
+  "error": {
+    "message": "Validation error: password: must have required property 'password', name: must have required property 'name'",
+  },
+  "success": false,
+}
+`;
+
+exports[`Auth Routes POST /api/v1/auth/signup should return 409 if email already exists 1`] = `
+{
+  "error": {
+    "message": "Email already in use",
+  },
+  "success": false,
+}
+`;

@@ -45,7 +45,15 @@ const getPathwayById = async (req: Request, res: Response, next: NextFunction) =
  */
 const createPathway = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const pathway = await pathwayService.create(req.body.pathway);
+        if (!req.user) {
+            return next(createError("Authentication required", 401));
+        }
+
+        const pathway = await pathwayService.create({
+            ...req.body.pathway,
+            owner: req.user.id
+        });
+        
         return res.status(201).json({ pathway });
     }
     catch (err) {
@@ -58,11 +66,22 @@ const createPathway = async (req: Request, res: Response, next: NextFunction) =>
  */
 const updatePathway = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const pathway = await pathwayService.update(req.params.id, req.body.pathway);
+        if (!req.user) {
+            return next(createError("Authentication required", 401));
+        }
 
-        if (!pathway) {
+        // Check ownership
+        const existingPathway = await pathwayService.findById(req.params.id);
+        
+        if (!existingPathway) {
             return next(createError("Pathway not found", 404));
         }
+        
+        if (existingPathway.owner._id.toString() !== req.user.id) {
+            return next(createError("Not authorized to update this pathway", 403));
+        }
+
+        const pathway = await pathwayService.update(req.params.id, req.body.pathway);
 
         return res.json({ pathway });
     }
@@ -76,11 +95,22 @@ const updatePathway = async (req: Request, res: Response, next: NextFunction) =>
  */
 const removePathway = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const pathway = await pathwayService.remove(req.params.id);
+        if (!req.user) {
+            return next(createError("Authentication required", 401));
+        }
 
-        if (!pathway) {
+        // Check ownership
+        const existingPathway = await pathwayService.findById(req.params.id);
+        
+        if (!existingPathway) {
             return next(createError("Pathway not found", 404));
         }
+        
+        if (existingPathway.owner._id.toString() !== req.user.id) {
+            return next(createError("Not authorized to delete this pathway", 403));
+        }
+
+        const pathway = await pathwayService.remove(req.params.id);
 
         return res.json({
             message: "Pathway successfully deleted",

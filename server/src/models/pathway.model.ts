@@ -18,6 +18,11 @@ const pathwaySchema = new mongoose.Schema({
             ref: "Module"
         }],
         default: [],
+    },
+    owner: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "User",
+        required: true
     }
 });
 
@@ -29,5 +34,6 @@ export type PathwayUpdateInput = Omit<Partial<PathwayData>,
     "_id" |
     "createdAt" |
     "updatedAt" |
-    "modules"
+    "modules" |
+    "owner"
 >;

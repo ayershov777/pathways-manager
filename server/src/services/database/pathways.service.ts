@@ -9,6 +9,7 @@ export const findAll = async (page: number, limit: number) => {
     const [pathways, total] = await Promise.all([
         Pathway.find()
             .select("-modules")
+            .populate('owner', 'name')
             .skip(skip)
             .limit(limit)
             .lean(),
@@ -29,7 +30,9 @@ export const findAll = async (page: number, limit: number) => {
  * Find pathway by ID
  */
 export const findById = async (id: string) => {
-    return Pathway.findById(id).lean();
+    return Pathway.findById(id)
+        .populate('owner', 'name')
+        .lean();
 };
 
 /**
